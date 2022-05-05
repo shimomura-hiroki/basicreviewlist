@@ -13,7 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "expo": "~44.0.0",
-    "expo-constants": "^13.0.2",
+    "expo-constants": "~13.0.1",
     "expo-status-bar": "~1.2.0",
     "firebase": "^8.10.0",
     "font-awesome": "^4.7.0",
@@ -31,3 +31,4 @@
   },
   "private": true
 }
+
