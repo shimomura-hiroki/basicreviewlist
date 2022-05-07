@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 /* components */
 import { ShopDetail } from "../components/ShopDetail";
+import { FloatingActionButton } from "../components/FlotingActionButton"
 /* types */
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
@@ -24,6 +25,10 @@ export const ShopScreen: React.FC<Props> = ({ navigation, route }: Props) => {
     return (
         <SafeAreaView style={styles.container}>
             <ShopDetail shop={shop} />
+            <FloatingActionButton
+            iconName="plus"
+            onPress={() => navigation.navigate("CreateReview", { shop })}
+            />
         </SafeAreaView>
     );
 };
