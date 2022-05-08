@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, View, Image } from "react-native";
 
 /* components */
 import { IconButton } from "../components/IconButton";
@@ -11,6 +11,8 @@ import firebase from "firebase";
 import { addReview } from "../lib/firebase";
 /*contexts*/
 import { UserContext } from "../contexts/userContext";
+/* lib */
+import { pickImage } from "../lib/image-picker";
 /* types */
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types/navigation";
@@ -30,6 +32,7 @@ export const CreateReviewScreen: React.FC<Props> = ({
     const [text, setText] = useState<string>("");
     const [score, setScore] = useState<number>(3);
     const [loading, setLoading] = useState<boolean>(false);
+    const [imageUri, setImageUri] = useState<string>("");
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -40,6 +43,11 @@ export const CreateReviewScreen: React.FC<Props> = ({
         ),
         });
     }, [shop]);
+
+    const onPickImage = async () => {
+        const uri = await pickImage();
+        setImageUri(uri);
+    };
 
     const onSubmit = async () => {
         setLoading(true);
@@ -75,6 +83,12 @@ export const CreateReviewScreen: React.FC<Props> = ({
             label="レビュー"
             placeholder="レビューを書いて下さい"
         />
+        <View style={styles.photoContainer}>
+        <IconButton onPress={onPickImage} name="camera" color="gray" />
+        {!!imageUri && (
+            <Image source={{ uri: imageUri }} style={styles.image} />
+        )}
+        </View>
         <Button text="レビューを投稿する" onPress={onSubmit} />
         <Loading visible={loading} />
         </SafeAreaView>
@@ -83,7 +97,15 @@ export const CreateReviewScreen: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: "#fff",
+    flex: 1,
+    backgroundColor: "#fff",
+    },
+    photoContainer: {
+    margin: 8,
+    },
+    image: {
+    width: 200,
+    height: 200,
+    margin: 8,
     },
 });
