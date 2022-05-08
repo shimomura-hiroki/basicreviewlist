@@ -5,7 +5,7 @@ import { MainTabNavigator } from "./MainTabNavigator";
 /* screents */
 import { AuthScreen } from "../screens/AuthScreen";
 /* contexts */
-import { UserContext } from "../contexts/useContext";
+import { UserContext } from "../contexts/userContext";
 
 export const AppNavigator = () => {
     const { user } = useContext(UserContext);

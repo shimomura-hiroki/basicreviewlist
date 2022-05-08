@@ -6,7 +6,7 @@ import {
     Text,
 } from "react-native";
 import { signin } from "../lib/firebase";
-import { UserContext } from "../contexts/useContext";
+import { UserContext } from "../contexts/userContext";
 
 export const AuthScreen: React.FC = () => {
     const {setUser} = useContext(UserContext)

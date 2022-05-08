@@ -27,6 +27,7 @@ const MainStack = () => (
 
 export const HomeStackNavigator = () => {
     return(
+        // @ts-ignore
         <RootStack.Navigator mode="modal">
             <RootStack.Screen
                 name="Main"

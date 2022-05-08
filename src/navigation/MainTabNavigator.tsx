@@ -20,7 +20,7 @@ export const MainTabNavigator = () => {
             } else if (route.name === "User") {
         iconName = "user";
         }
-
+// @ts-ignore
     return <Feather name={iconName} size={size} color={color} />;
     },
 });

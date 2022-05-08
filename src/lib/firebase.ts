@@ -5,24 +5,28 @@ import "firebase/auth";
 import { Shop } from "../types/shop";
 import Constants from "expo-constants";
 import { initialUser, User } from "../types/user";
+import { Review } from "../types/review";
 
-if (firebase.apps.length === 0) {
+
+if (!firebase.apps.length) {
     firebase.initializeApp(Constants.manifest!.extra!.firebase);
 };
 
 export const getShops = async () => {
-    try{
-        const snapshot = await firebase.firestore().collection("shops").orderBy("score", "desc").get();
-        const shops = snapshot.docs.map((doc: { data: () => any; }) => doc.data() as Shop);
+    const snapshot = await firebase
+        .firestore()
+        .collection("shops")
+        .orderBy("score", "desc")
+        .get();
+        const shops = snapshot.docs.map(
+        (doc) => ({ ...doc.data(), id: doc.id } as Shop)
+        );
         return shops;
-    } catch (err) {
-        console.log(err);
-        return [];
-    }
-};
+    };
 
 export const signin = async () => {
     const userCredential = await firebase.auth().signInAnonymously();
+    // @ts-ignore
     const { uid } = userCredential.user;
     const userDoc = await firebase.firestore().collection("users").doc(uid).get();
     if (!userDoc.exists) {
@@ -38,3 +42,16 @@ export const signin = async () => {
         } as User;
     }
 };
+
+export const updateUser = async (userId: string, params: any) => {
+    await firebase.firestore().collection("users").doc(userId).update(params);
+    };
+
+export const addReview = async (shopId: string, review: Review) => {
+    await firebase
+        .firestore()
+        .collection("shops")
+        .doc(shopId)
+        .collection("reviews")
+        .add(review);
+    };
