@@ -1,5 +1,3 @@
-
-
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
@@ -11,6 +9,7 @@ const getCameraRollPermission = async () => {
         }
     }
 };
+
 
 export const pickImage = async () => {
   // パーミッションの取得

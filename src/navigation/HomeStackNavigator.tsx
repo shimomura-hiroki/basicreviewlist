@@ -10,20 +10,22 @@ import { RootStackParamList } from "../types/navigation";
 const Stack = createStackNavigator<RootStackParamList>();
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const MainStack = () => (
-    <Stack.Navigator
-        screenOptions={{
+export const MainStack = () => {
+        return (
+        <Stack.Navigator
+            screenOptions={{
             headerTintColor: "#000",
-        }}
-    >
-    <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-    />
-        <Stack.Screen name="Shop" component={ShopScreen} />
-    </Stack.Navigator>
-);
+            }}
+        >
+            <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Shop" component={ShopScreen} />
+        </Stack.Navigator>
+        );
+    };
 
 export const HomeStackNavigator = () => {
     return(
