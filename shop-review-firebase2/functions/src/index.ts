@@ -1,9 +1,9 @@
 import * as functions from "firebase-functions";
 import { User } from "./types/user";
 import admin = require("firebase-admin");
+import { Review } from "./types/review";
+import { Shop } from "./types/shop";
 //import algoliasearch from "algoliasearch";
-//import { Review } from "./types/review";
-//import { Shop } from "./types/shop";
 
 //const ALGOLIA_ID = functions.config().algolia.id;
 //const ALGOLIA_ADMIN_KEY = functions.config().algolia.key;
@@ -37,8 +37,8 @@ exports.onUpdateUser = functions
         console.log(err);
     }
 });
-/*
-exports.onWriteReview = functions
+
+    exports.onWriteReview = functions
     .region("asia-northeast1")
     .firestore.document("shops/{shopId}/reviews/{reviewId}")
     .onWrite(async (change, context) => {
@@ -46,69 +46,68 @@ exports.onWriteReview = functions
         const review = change.after.data() as Review;
         const db = admin.firestore();
         try {
-            const shopRef = db.collection("shops").doc(shopId);
-            const shopDoc = await shopRef.get();
-            const shop = shopDoc.data() as Shop;
+        const shopRef = db.collection("shops").doc(shopId);
+        const shopDoc = await shopRef.get();
+        const shop = shopDoc.data() as Shop;
 
-      // 平均scoreの計算
+        // 平均scoreの計算
         let { score1 = 0, score2 = 0, score3 = 0, score4 = 0, score5 = 0 } = shop;
         if (review.score === 1) {
-        score1 += 1;
+            score1 += 1;
         } else if (review.score === 2) {
-        score2 += 1;
+            score2 += 1;
         } else if (review.score === 3) {
-        score3 += 1;
+            score3 += 1;
         } else if (review.score === 4) {
-        score4 += 1;
+            score4 += 1;
         } else if (review.score === 5) {
-        score5 += 1;
+            score5 += 1;
         }
         let aveScore =
-        (score1 + score2 * 2 + score3 * 3 + score4 * 4 + score5 * 5) /
-        (score1 + score2 + score3 + score4 + score5);
-      aveScore = Math.round(aveScore * 100) / 100;
+            (score1 + score2 * 2 + score3 * 3 + score4 * 4 + score5 * 5) /
+            (score1 + score2 + score3 + score4 + score5);
+        aveScore = Math.round(aveScore * 100) / 100;
 
-      // shopの更新
+        // shopの更新
         let params = {};
         if (review.score === 1) {
-        params = {
+            params = {
             score1: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         } else if (review.score === 2) {
-        params = {
+            params = {
             score2: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         } else if (review.score === 3) {
-        params = {
+            params = {
             score3: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         } else if (review.score === 3) {
-        params = {
+            params = {
             score3: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         } else if (review.score === 4) {
-        params = {
+            params = {
             score4: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         } else if (review.score === 5) {
-        params = {
+            params = {
             score5: admin.firestore.FieldValue.increment(1),
             score: aveScore,
-        };
+            };
         }
         await shopRef.update(params);
-
+/*
         index.saveObject({
-        objectID: reviewId,
-        ...review,
-        });
-    } catch (err) {
+            objectID: reviewId,
+            ...review,
+        }); */
+        } catch (err) {
         console.log(err);
-    }
+        }
     });
-    */
