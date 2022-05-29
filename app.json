@@ -37,6 +37,10 @@
         "messagingSenderId": "464083084225",
         "appId": "1:464083084225:web:f8fe608bc59c1c87c54540",
         "measurementId": "G-ML9F3QE5E0"
+      },
+      "algolia": {
+        "appId": "DVEMNCVQG9",
+        "searchApiKey": "9cc22326f3bc00fba3233470c180a8e1"
       }
     }
   }

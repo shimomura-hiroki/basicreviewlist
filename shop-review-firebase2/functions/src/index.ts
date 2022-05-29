@@ -1,15 +1,15 @@
 import * as functions from "firebase-functions";
 import { User } from "./types/user";
 import admin = require("firebase-admin");
+import algoliasearch from "algoliasearch";
 import { Review } from "./types/review";
 import { Shop } from "./types/shop";
-//import algoliasearch from "algoliasearch";
 
-//const ALGOLIA_ID = functions.config().algolia.id;
-//const ALGOLIA_ADMIN_KEY = functions.config().algolia.key;
+const ALGOLIA_ID = functions.config().algolia.id;
+const ALGOLIA_ADMIN_KEY = functions.config().algolia.key;
 
-//const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-//const index = client.initIndex("reviews");
+const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
+const index = client.initIndex("reviews");
 
 admin.initializeApp();
 
@@ -102,11 +102,11 @@ exports.onUpdateUser = functions
             };
         }
         await shopRef.update(params);
-/*
+
         index.saveObject({
             objectID: reviewId,
             ...review,
-        }); */
+        });
         } catch (err) {
         console.log(err);
         }
