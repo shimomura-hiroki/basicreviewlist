@@ -54,7 +54,7 @@ export const CreateReviewScreen: React.FC<Props> = ({
 
     const onSubmit = async () => {
         if(!text || !imageUri){
-            Alert.alert("レビューまたは画像がありません。\nThere are no reviews or images.")
+            Alert.alert("レビューまたは画像がありません。")
             return;
         }
 
