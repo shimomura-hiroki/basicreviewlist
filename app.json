@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "shop-review-app",
-    "slug": "shop-review-app",
-    "version": "1.0.1",
+    "name": "basicreviewlist",
+    "slug": "basicreviewlist",
+    "version": "1.0.2",
     "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

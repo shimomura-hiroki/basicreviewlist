@@ -74,14 +74,14 @@ export const createReviewRef = async (shopId: string) => {
         };
 
         export const getReviews = async (shopId: string) => {
-          const reviewDocs = await firebase
+        const reviewDocs = await firebase
             .firestore()
             .collection("shops")
             .doc(shopId)
             .collection("reviews")
             .orderBy("createdAt", "desc")
             .get();
-          return reviewDocs.docs.map(
+        return reviewDocs.docs.map(
             (doc) => ({ ...doc.data(), id: doc.id } as Review)
-          );
+        );
         };
